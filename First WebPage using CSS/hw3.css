@@ -1,0 +1,132 @@
+*, body{
+	margin: 0;
+	padding: 0;
+}
+#bodyid {
+	background: #FCFBEE url('page_background.png') repeat-x;
+	background-size: 1% 44%;
+	text-align: center;
+    font-family: "Times New Roman", Times, serif;
+}
+.mainimage {
+    background-image: url(main_image.jpg);
+    height:354px;
+    width:900px;
+    margin: 0 auto;
+   line-height: 0;
+    text-align: center;
+}
+
+#flower{
+    padding-top:236px;
+    padding-left: 444px;
+}
+#text1{
+    font-family: "Times New Roman",Times,serif;
+    font-size:32px;
+    font-weight: bold;
+    color:#AB9800;
+}
+
+#text2{
+    font-family: "Times New Roman",Times,serif;
+    font-size:30px;
+    font-weight: bold;
+    color:#F3D861;
+
+}
+#brian{
+
+    font-family: "Times New Roman",Times,serif;
+    margin-left: 476px;
+    margin-top: 23px;
+    font-size:20px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    color:#756800;
+}
+.menu_tab{
+    background-image: url("menu_tab.png");
+    width: 940px;
+    height: 69px;
+    margin: 0 auto;
+    text-align: center;
+    line-height: 0;
+}
+#navcontainer {
+    padding: 24px 0px;
+    width:100%;
+		padding-left: 2px;
+}
+#navcontainer ul li{
+    display: inline;
+    margin: 0px 44px;
+    font-family: "Times New Roman", Times, serif;
+    text-align: center;
+    font-size: 18px;
+
+}
+
+#navcontainer a{
+    color: black;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+#navcontainer a:hover{
+    color: #E4CA10;
+    text-decoration: none;
+    font-weight: bold;
+}
+#heading {
+	font-size: 22px;
+    margin: -4px 0 0 10px;
+    text-align: left;
+    word-spacing: -2.8px;
+}
+#about {
+	text-align: left;
+	font-size: 16px;
+}
+#paragraph {
+    font-size: 14px;
+    margin: -18px 12px 0 10px;
+    text-align: left;
+    word-spacing: -0.2px;
+}
+
+#para1{
+    word-spacing: -0.2px;
+    text-align: justify;
+}
+#para2{
+    margin-top: -2px;
+}
+#para3{
+    word-spacing: 1.2px;
+}
+.Content {
+    background-color: white;
+    font-family: "Times New Roman", Times, serif;
+    height: 315px;
+    margin: 0px auto;
+    text-align: left;
+    width: 900px;
+    word-spacing: 2.0px
+}
+
+#More_Information {
+	font-size: 16px;
+    margin-top: -2px;
+    word-spacing: 2px;
+}
+#link2 {
+
+    font-size:12px;
+	text-align: center;
+}
+.Content a {
+	color: #E4CA10;
+    text-decoration: none;
+    font-weight: bold;
+}

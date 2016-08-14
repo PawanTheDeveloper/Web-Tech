@@ -1,0 +1,166 @@
+<head>
+<title>Radio Database</title>
+<script>
+function generateHTML(xmlDoc)
+{
+      root=xmlDoc.DocumentElement;
+      table=xmlDoc.getElementsByTagName("Table")[0];
+      html_text="<html><head><title>Radio Database</title></head><body>";
+      html_text+="<table border='2'>";
+      html_text+="<tr text-align:center>";
+      headchild=table.children.item(0); 
+      var x=220, y=130;
+      if(table.children.length==1)
+      {
+      	alert("No Records Found.");
+      	return 0;
+      }
+      for(k=0;k<headchild.children.length;k++)
+      {
+      		html_text+="<th nowrap>"+headchild.children.item(k).textContent+"</th>";
+      }
+      html_text+="</tr>";
+      for(i=1;i<table.children.length;i++)
+      {
+      	html_text+="<tr>";
+      	rowchild=table.children.item(i); 
+      	for(j=0;j<rowchild.children.length;j++)
+      	{
+      		if(rowchild.children.item(j).firstChild==null)
+      		{
+      			html_text+="<td></td>";
+      			continue;
+      		}
+      		if(rowchild.children.item(j).nodeName=="Logo")
+      		{
+      			if(rowchild.children.item(j).firstChild==null)
+      			{
+      				html_text+="<td height='130'></td>";
+      				continue;
+      			}
+      			if(rowchild.children.item(j).firstChild.nodeValue.trim()=="")
+      			{
+      				html_text+="<td height='130'></td>";
+      				continue;
+      			}
+      			html_text+="<td><img alt='Image not found' src='"+rowchild.children.item(j).textContent+"' width='"+x+"' height='"+y+"'></td>";
+      			continue;
+      		}
+      		if(rowchild.children.item(j).nodeName=="HomePage")
+      		{
+      			html_text+="<td nowrap><a href='"+rowchild.children.item(j).textContent+"'>"+rowchild.children.item(j).textContent+"</td>";
+      			continue;
+      		}
+      		if(rowchild.children.item(j).nodeName=="Location")
+      		{
+      			locationchild=rowchild.children.item(j);
+      			html_text+="<td nowrap><ul>"
+      			for(a=0;a<locationchild.children.length;a++)
+      			{
+      				if(locationchild.children.item(a).firstChild == null) 
+                    {	
+                    } 
+                    else if(locationchild.children.item(a).firstChild.nodeValue.trim() == "") 
+                    {
+                    }
+      				else
+      					html_text+="<li>"+locationchild.children.item(a).textContent+"</li>";
+      			}
+      			html_text+="</ul></td>";
+      			continue;
+      		}      		
+      		html_text+="<td nowrap>"+rowchild.children.item(j).textContent+"</td>";
+      	}
+      	html_text+="</tr>";     	
+      }
+      
+      html_text+="</table></body></html>";
+}
+
+function loadXML(url)
+{
+	var xmlDoc;
+      xmlhttp=new XMLHttpRequest();
+      xmlhttp.open("GET",url,false);
+      xmlhttp.onreadystatechange=function()
+      {
+      	if(xmlhttp.readyState==4)
+      	{
+      		if(xmlhttp.status==200)
+      		{
+      			if(xmlhttp.responseXML==null)
+      			{
+      				alert("XML is invalid");
+      			}
+      			else if(xmlhttp.responseXML.documentElement.nodeName=="parsererror")
+      			{
+      				alert("XML is invalid");
+      			}
+      			else
+      			{
+      				xmlDoc=xmlhttp.responseXML;
+      			}
+      		}
+      		else if(xmlhttp.status==400)
+      			alert("Bad Request to Server");
+      		else if(xmlhttp.status==401)
+      			alert("Unauthorized Access, Authentication failed");
+      		else if(xmlhttp.status==403)
+      			alert("Forbidden");
+      		else if(xmlhttp.status==404)
+      			alert("File Not found");
+      		else
+      			alert("File doesn't Exist");
+      	}
+      }
+      xmlhttp.send();
+      				
+      xmlDoc=xmlhttp.responseXML;
+      if(!xmlDoc)
+      {
+      	xmlDoc=(new DOMParser()).parseFromString(xml.responseText,'text/xml');
+      }
+      return xmlDoc;
+}
+
+function viewXML(what)
+{
+    var URL = what.URL.value;
+    if(URL.trim()=="")
+    {
+    	alert("Please provide XML Filename");
+    	return;
+    }
+    xmlDoc = loadXML(URL);
+    //Below line is if no records are there and we just don't display anything and return
+    if(generateHTML(xmlDoc)==0)
+    	return;
+    xmlDoc.onload=generateHTML(xmlDoc);    
+    hWin = window.open("", "Radio Database","height=1400,width=1400,scrollbars=yes");
+    hWin.document.write(html_text);
+    hWin.document.close();
+}
+</script>
+<style>
+body
+{
+    text-align:center;
+}
+h1
+{
+	font-size:25px
+}
+
+</style>
+</head>
+<body>
+
+<h1>Enter XML file and click on Submit</h1>
+<form name="myform" method="post" id="location">
+<input type="text" name="URL" maxlength="255" size="30" value="" />
+<br/><br/>
+<input type="submit" name="submit" value="Submit Query" onClick="viewXML(this.form)"/>
+</form>
+<noscript></noscript>
+</body>
+</html>
